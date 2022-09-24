@@ -1,4 +1,5 @@
 <?php 
+session_start();
 
 $servername = "localhost";
 $username = "root";
@@ -29,11 +30,12 @@ if(isset($_POST['submit'])){
         header("location:welcome.php"); 
     }
 
-    if ($row['email_address'] == $uname && $row['password'] == $password && $row['type']==NULL) {
+    if ($row['email_address'] == $uname && $row['password'] == $password && $row['type']=='user') {
         echo "Logged in!<br>";
         $_SESSION['first_name'] = $row['first_name'];
         $_SESSION['id'] = $row['ID'];
-    
+        $_SESSION['first_name'] = $row['first_name'];
+        $_SESSION['last_name'] = $row['family_name'];
         header("location:welcomeuser.php") ;
     }
 }
@@ -44,76 +46,57 @@ if(isset($_POST['submit'])){
 <!DOCTYPE html>
 <html>
 <head>
-	<title> Login Form in HTML5 and CSS3</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-	<link rel="stylesheet" a href="css\font-awesome.min.css">
+    <title> Login</title>
     <style>
-        body{
-	margin: 0 auto;
-	background-image: url("../image/technology.jpg");
-	background-repeat: no-repeat;
-	background-size: 100% 720px;
+.email input{
+    width: 400px;
+    padding: 20px;
+    border-radius:10px;
+    height: 20px;
+    border:1px solid grey;
+    margin: auto;
 }
+ 
+.pass input{
+    width: 400px;
+    padding: 20px;
+    border-radius:10px;
+    height: 20px;
+    margin: 20px;
+    border:1px solid grey;
 
-.container{
-	width: 500px;
-	height: 450px;
-	text-align: center;
-	margin: 0 auto;
-	background-color: rgba(44, 62, 80,0.7);
-	margin-top: 160px;
 }
+.btn{
+    background-color:blue;
+    width: 500px;
+    padding: 20px;
+    height: 20px;
+    border:1px solid grey;
+    border-radius:10px;
+    color:white;
+}
+ 
 
-.container img{
-	width: 150px;
-	height: 150px;
-	margin-top: -60px;
-}
 
-input[type="text"],input[type="password"]{
-	margin-top: 30px;
-	height: 45px;
-	width: 300px;
-	font-size: 18px;
-	margin-bottom: 20px;
-	background-color: #fff;
-	padding-left: 40px;
-}
-
-.form-input::before{
-	content: "\f007";
-	font-family: "FontAwesome";
-	padding-left: 07px;
-	padding-top: 40px;
-	position: absolute;
-	font-size: 35px;
-	color: #2980b9; 
-}
-
-.form-input:nth-child(2)::before{
-	content: "\f023";
-}
-
-.btn-login{
-	padding: 15px 25px;
-	border: none;
-	background-color: #27ae60;
-	color: #fff;
-}
     </style>
 </head>
 <body>
-	<div class="container">
-	<img src="image/login.png"/>
-		<form method="POST">
-			<div class="form-input">
-				<input type="email" name="email" placeholder="Enter the User email"/>	
-			</div>
-			<div class="form-input">
-				<input type="password" name="password" placeholder="password"/>
-			</div>
-			<input type="submit" name="submit" type="submit" value="LOGIN" class="btn-login"/>
-		</form>
-	</div>
+    <center><h1>login </h1></center>
+<center>    <h5>welcome back</h5></center>
+    <div class="container">
+
+        <center><form method="POST">
+            <div class="email">
+
+                <input type="email" name="email" placeholder="Enter the User email" required/>
+            </div>
+            <div class="pass">
+
+                <input type="password" name="password" placeholder="password" required>
+            </div>
+            <p class="text-center mt-2 fs-2 text-muted">Don't have an account?<a href="register.php">sign up</a></p>
+            <input type="submit" name="submit" type="submit" value="LOGIN" class="btn"/>
+        </form></center>
+    </div>
 </body>
 </html>

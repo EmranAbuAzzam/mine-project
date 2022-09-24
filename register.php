@@ -1,5 +1,6 @@
 
 <?php
+session_start();
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -33,8 +34,8 @@ if ($conn->connect_error) {
                 $passwordconfirm = $_POST['passwordconfirm'];
 		
 			$conn->query("INSERT INTO `adminuser`(email_address,first_name,middle_name,last_name,family_name,mobile,date_of_birth,password,confirm_password) VALUES('$email','$fname','$mname','$lname','$famname','$mobile','$date','$password','$passwordconfirm')");
-           // INSERT INTO adminuser (column1, column2, column3,...)
-          //VALUES (value1, value2, value3,...)
+            $_SESSION['first_name'] = $row['first_name'];
+            $_SESSION['last_name'] = $row['family_name'];
 			header('location:welcomeuser.php');
 		}}}}}}}}}
 	}
@@ -97,14 +98,14 @@ include "./includes/head.php";
             <input type="password" class="form-control" id="inputPasswordConfirm" name="passwordconfirm">
             <div id="confirm-password-error"></div>
         </div>
-        <p class="text-center mt-2 fs-2 text-muted">Already have an account?<a href="./login.php"></a></p>
+        <p class="text-center mt-2 fs-2 text-muted">Already have an account?<a href="login.php">login</a></p>
         <div class="d-grid gap-2 col-6 mx-auto mt-5 ">
             <button class="btn btn-primary rounded-5 fs-3" type="submit" name="submit" style="background-color:palevioletred ;">Sign up</button>
 
         </div>
     </form>
 </div>
-<script src="./script.js"></script>
+<script src="script.js"></script>
 <?php
 include "./includes/footer.php";
 ?>
